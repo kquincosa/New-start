@@ -15,12 +15,25 @@ class CwndControl:
         ###
         ### IMPLEMENT
         ###
+
+        if self.cwnd < self.ssthresh:
+            self.cwnd += MTU
+
+        if self.cwnd >= self.ssthresh:
+            self.cwnd += MTU * MTU / self.cwnd
         pass
 
     def on_timeout(self):
         ###
         ### IMPLEMENT
         ###
+
+        if self.cwnd < self.ssthresh:
+            self.ssthresh = self.cwnd / 2
+            self.cwnd = 1.0 * MTU
+
+        if self.cwnd >= self.ssthresh:
+            self.cwnd = self.cwnd / 2
         pass
 
     def __str__(self):

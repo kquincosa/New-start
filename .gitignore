@@ -4,3 +4,4 @@
 server
 client
 *.pyc
+.idea
